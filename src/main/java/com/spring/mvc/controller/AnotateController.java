@@ -16,6 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.mvc.dao.MemberDao;
 import com.spring.mvc.model.Member;
 
+/**
+ * Controller class to handle all requests.
+ * 
+ * @author Vijithe Epa
+ */
 @Controller
 @RequestMapping("/")
 public class AnotateController {
@@ -23,6 +28,11 @@ public class AnotateController {
 	@Autowired
 	private MemberDao memberDao;
 
+	/**
+	 * Test method to print a simple message"
+	 * 
+	 * @return {@link ModelAndView} containing the message to print.
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/home")
 	public ModelAndView helloWorld() {
 		ModelAndView model = new ModelAndView("HelloWorld");
@@ -30,6 +40,12 @@ public class AnotateController {
 		return model;
 	}
 
+	/**
+	 * home page URL handling method.
+	 * 
+	 * @param model type {@link Model}.
+	 * @return view name as {@link String}.
+	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/memberhome")
 	public String memberHome(Model model) {
 		model.addAttribute("msg", "Register User");
@@ -40,6 +56,14 @@ public class AnotateController {
 		return "member";
 	}
 
+	/**
+	 * method to handle User register action.
+	 * 
+	 * @param newMember type {@link Member}.
+	 * @param result type {@link BindingResult}
+	 * @param model type {@link Model}.
+	 * @return view name as {@link String}.
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerNewMember(@Valid @ModelAttribute("newMember") Member newMember, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
@@ -49,13 +73,6 @@ public class AnotateController {
 			model.addAttribute("members", memberDao.findAllOrderedByName());
 			return "member";
 		}
-	}
-
-	@RequestMapping(value = "/loadCount")
-	public int getCount() {
-		System.out.println("Inside load count method....");
-		int count = 10;
-		return count;
 	}
 
 }

@@ -16,6 +16,11 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * Entity Class for {@link Member} details.
+ * @author Vijith Epa.
+ *
+ */
 @Entity
 @Table(name="MEMBER", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Member implements Serializable {
